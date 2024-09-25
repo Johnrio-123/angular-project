@@ -1,0 +1,90 @@
+<div class="max-w-7xl px-5 sm:px-10 mx-auto">
+  <app-header></app-header>
+
+  <!-- HERO IMAGE -->
+  <div
+    style="
+      background: url('https://plus.unsplash.com/premium_photo-1678402545080-2353b489c0c3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-position: center;
+      background-size: cover;
+    "
+    class="relative h-[67vh] mt-4 flex justify-center items-center bg-opacity-90"
+  >
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="flex flex-col text-center text-white relative">
+      <h2 class="font-bold text-4xl">Let's Bring Beauty To Your Home</h2>
+      <p class="text-2xl mt-3">Fast Delivery & Fair Prices</p>
+      <button
+        class="hover:bg-white hover:text-black transition-colors active:bg-slate-300 mt-12 w-fit h-fit mx-auto py-2 px-6 bg-black text-white font-bold rounded"
+      >
+        Shop Now
+      </button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+    <div
+      *ngFor="let item of landingPageGrid"
+      style="
+        background: url( '{{ item.backgroundUrl }}' );
+        background-position: center;
+        background-size: cover;
+      "
+      class="grid place-content-center h-[40vh] relative"
+    >
+      <div class="absolute inset-0 bg-black opacity-20"></div>
+      <div class="relative text-white grid gap-3 text-center">
+        <h3 class="font-bold text-2xl">{{ item.label }}</h3>
+        <button class="group text-white font-semibold flex items-center gap-2">
+          Shop Now
+          <mat-icon class="group-hover:-rotate-45 transition-transform"
+            ><span class="material-symbols-outlined">
+              arrow_forward
+            </span></mat-icon
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELLING PRODUCTS -->
+  <div>
+    <div class="flex justify-between items-center mt-20">
+      <h2 class="text-3xl font-bold">Popular Products</h2>
+      <button
+        class="hidden sm:block hover:bg-slate-700 transition-colors active:bg-slate-500 py-2 px-6 bg-black text-white font-semibold rounded"
+      >
+        View All Products
+      </button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+      <!-- CARDS -->
+      <div *ngFor="let product of homeProducts">
+        <img class="w-full h-72" src="{{ product.imageUrl }}" alt="" />
+        <div class="flex flex-col mt-5">
+          <h3 class="font-bold text-lg">{{ product.name }}</h3>
+          <div class="flex">
+            <!-- Loop for full stars -->
+            <ng-container *ngFor="let star of getFullStars(product.rating); let i = index">
+              <mat-icon  class="text-yellow-500"> star </mat-icon>
+            </ng-container>
+      
+            <!-- Display half star if needed -->
+            <ng-container *ngIf="hasHalfStar(product.rating)">
+              <mat-icon class="text-yellow-500"> star_half </mat-icon>
+            </ng-container>
+          </div>
+          <p>${{ product.price }}.00</p>
+          <button
+            class="hover:bg-slate-700 transition-colors active:bg-slate-500 py-2 px-6 bg-black text-white font-semibold rounded"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer/>
